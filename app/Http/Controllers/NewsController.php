@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NewsCollection;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,7 +18,7 @@ class NewsController extends Controller
     {
         $data = [
             'title' => 'Homepage',
-             'news' => News::all()
+             'news' => new NewsCollection(News::paginate(8))
         ];
 
         return Inertia::render('Homepage')->with($data);
